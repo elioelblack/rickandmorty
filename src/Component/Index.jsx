@@ -134,7 +134,7 @@ export default class Index extends Component{
     }
     
     onClickSearch(e){
-        alert(e.id)             
+        //alert(e.id)             
         const form = e;
         if (form.checkValidity() === false) {            
             this.setState({
