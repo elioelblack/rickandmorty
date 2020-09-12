@@ -19,6 +19,7 @@ export default class Index extends Component{
         this.returnItemPerPage = this.returnItemPerPage.bind(this)
         this.onChange = this.onChange.bind(this)
         this.onClickSearch = this.onClickSearch.bind(this)
+        this.onShowFavorites = this.onShowFavorites.bind(this)
     }
     componentDidMount(){
         this.returnItemPerPage(this.state.next)
@@ -146,12 +147,18 @@ export default class Index extends Component{
             this.onSearch(this.state.name)
         }
     }
+    onShowFavorites(e){
+
+    }
 
     render(){
         const {next,prev,results,name, pages} = this.state
         return(
             <>
-                <TopBar onChange={this.onChange} name={name} onClickSearch={this.onClickSearch}/>
+                <TopBar onChange={this.onChange} name={name} 
+                onClickSearch={this.onClickSearch}
+                onShowFavorites={this.onShowFavorites}
+                />
                 <hr style={{borderBottom:1,marginTop:5}}/>                
                 {(this.state.results.length>0)&&
                 <nav aria-label="...">
@@ -180,9 +187,7 @@ export default class Index extends Component{
                 </nav>}
                 <hr style={{borderBottom:1,marginTop:1}}/>
                     <Items items={results} />  
-                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
-                    Launch static backdrop modal
-                    </button>
+                    
                     <div className="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
@@ -194,6 +199,7 @@ export default class Index extends Component{
                         </div>
                         <div className="modal-body">
                             {this.state.favorites}
+                            {this.state.favorites===""&&<h3>Empty</h3>}
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
